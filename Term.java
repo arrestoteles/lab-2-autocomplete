@@ -24,8 +24,11 @@ public class Term {
     // Extracts a prefix from the word.
     // If `len` is larger than the word length, the prefix is the entire word.
     public String getPrefix(int len) {
-        // TODO
-        throw new UnsupportedOperationException();
+        if (len > getWord().length()) {
+            return getWord();
+        } else{
+            return getWord().substring(0, len);
+        }
     }
 
     // Compares two terms in case-insensitive lexicographic order.
@@ -39,14 +42,25 @@ public class Term {
 
     // Compares two terms in descending order by weight.
     // TODO
-    public static final Comparator<Term> byReverseWeightOrder = null;
+    public static final Comparator<Term> byReverseWeightOrder = new Comparator<Term>() {
+        @Override
+        public int compare(Term t1, Term t2) {
+            return 0-Long.compare(t1.getWeight(), t2.getWeight());
+        }
+    };
 
     // This method returns a comparator that compares the two terms in case-insensitive
     // lexicographic order, but using only the first k characters of each word.
     public static Comparator<Term> byPrefixOrder(int k) {
         // TODO
+        return new Comparator<Term>() {
+            @Override
+            public int compare(Term t1, Term t2) {
+                return t1.getPrefix(k).compareToIgnoreCase(t2.getPrefix(k));
+            }
+        };
         // Hint: use getPrefix and follow what you did for byLexicographicOrder.
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
     /*
@@ -79,6 +93,7 @@ public class Term {
         Term t1 = new Term("abc", 20);
         Term t2 = new Term("ABCD", 30);
         Term t3 = new Term("abd", 25);
+
         System.out.println("* Testing byLexicographicOrder:");
         testComparator(Term.byLexicographicOrder, t1, t2, -1);
         testComparator(Term.byLexicographicOrder, t2, t3, -1);
