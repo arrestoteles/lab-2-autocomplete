@@ -30,7 +30,12 @@ public class Term {
 
     // Compares two terms in case-insensitive lexicographic order.
     // TODO
-    public static final Comparator<Term> byLexicographicOrder = null;
+    public static final Comparator<Term> byLexicographicOrder = new Comparator<Term>() {
+        @Override
+        public int compare(Term t1, Term t2) {
+            return t1.getWord().compareToIgnoreCase(t2.getWord());
+        }
+    };
 
     // Compares two terms in descending order by weight.
     // TODO
