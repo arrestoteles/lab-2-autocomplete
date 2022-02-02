@@ -61,7 +61,8 @@ public class RangeBinarySearch {
             ParsedInput parsedInput = new ParsedInput(new String[]{"dictionaries/gp2011.txt", "20000"});
             Term[] dictionary = parsedInput.dictionary;
             Arrays.sort(dictionary, Term.byLexicographicOrder);
-            Term key = new Term("Göteborg",0);
+            Term key = new Term("ABCD",0);
+
 
 
             System.out.println("First index is: " + firstIndexOf(dictionary,key,Term.byLexicographicOrder));
