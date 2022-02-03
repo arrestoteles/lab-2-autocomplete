@@ -23,7 +23,9 @@ public class Autocompleter {
     public int numberOfMatches(String prefix) {
         // TODO
         int[] startAndEndIndices = findPrefix(prefix);
-        return (startAndEndIndices[1]-startAndEndIndices[0] + 1);
+        int start = startAndEndIndices[0];
+        int end = startAndEndIndices[1];
+        return (start != -1 && end != -1) ? end - start + 1 : 0;
     }
 
     private int[] findPrefix(String prefix){
@@ -38,9 +40,12 @@ public class Autocompleter {
     // Complexity: O(log N + M log M) where M is the number of matching terms
     public Term[] allMatches(String prefix) {
         // TODO
-        int[] startAndEndIndices = findPrefix(prefix);
-        Term[] prefixTerms = Arrays.copyOfRange(dictionary, startAndEndIndices[0], startAndEndIndices[1] + 1);
-        Arrays.sort(prefixTerms,Term.byReverseWeightOrder);
-        return prefixTerms;
+        if(numberOfMatches(prefix) > 0){
+            int[] startAndEndIndices = findPrefix(prefix);
+            Term[] prefixTerms = Arrays.copyOfRange(dictionary, startAndEndIndices[0], startAndEndIndices[1] + 1);
+            Arrays.sort(prefixTerms,Term.byReverseWeightOrder);
+            return prefixTerms;
+        }
+        return new Term[]{};
     }
 }
