@@ -15,13 +15,17 @@ public class RangeBinarySearch {
         // TODO
         int low = 0;
         int high = a.length - 1;
-        while (low <= high) {               // Stop when low and high meet
-            if (low == high) return low;
-            int mid = (low + high) / 2;     // Check middle of subarray
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (low == high && comparator.compare(a[mid], key) == 0){
+                return low;
+            } else if(low == high && comparator.compare(a[mid], key) != 0){
+                break;
+            }
             if (comparator.compare(a[mid], key) < 0) {
                 low = mid + 1;              // In right half
             } else {
-                high = mid;             // In left half
+                high = mid;             // In left half or the same
             }
         }
         return -1; // Search value not in array
@@ -34,41 +38,73 @@ public class RangeBinarySearch {
     public static<T> int lastIndexOf(T[] a, T key, Comparator<T> comparator) {
         // TODO
         int low = 0;
-        int high = a.length - 1;
-        while (low <= high) {               // Stop when low and high meet
-            if (low == high) return low;
-            int mid = (low + high) / 2;     // Check middle of subarray
-            if (comparator.compare(a[mid], key) > 0) {
-                high = mid;           // In right half
+        int high = a.length-1;
+
+        while (low <= high) {
+
+            int mid = (low + high) / 2;
+            if (low == high && comparator.compare(a[mid], key) == 0){
+                return low;
+            } else if(low == high){
+                break;
+            }
+
+            if (comparator.compare(a[mid], key) <= 0) {
+                low = mid+1;              // In right half
             } else {
-                low = mid+1; // In left half
+                high = mid-1;             // In left half or the same
             }
         }
         return -1; // Search value not in array
     }
 
+    // 1,3,3,3,4,5,6,7,8,9
+
+    /*
+    initial: lo= 0 hi=8
+    1st: mid=4
+    hi=3, lo=0
+    2nd: mid=1
+    hi=3, lo=2
+    3rd: mid=2
+    hi=3, lo=3
+    4th: mid=3
+    hi=3, lo=3
+    */
+
+
 //answer is 2 and 3 ?
     // For testing purposes.
     public static void main(String[] args) throws IOException {
             // Here you can write some tests if you want.
-            Term t1 = new Term("abc", 20);
+            Term t1 = new Term("a", 20);
             Term t2 = new Term("ABCD", 30);
             Term t3 = new Term("abd", 25);
             Term t4 = new Term("abd", 15);
-            Term[] terms = {t1, t2, t3, t4};
+            Term t5 = new Term("abd", 15);
+            Term t6 = new Term("hej", 15);
+
+
+            Term[] terms = {t1, t2, t3, t4, t5, t6};
             Term[] terms2 = {t1, t3, t2, t4};
 
             ParsedInput parsedInput = new ParsedInput(new String[]{"dictionaries/gp2011.txt", "20000"});
             Term[] dictionary = parsedInput.dictionary;
             Arrays.sort(dictionary, Term.byLexicographicOrder);
-            Term key = new Term("Göteborg",0);
+            Term key = new Term("abd",0);
 
+            Integer[] a = {0, 1};
+            Integer[] b = {0, 2};
+            /*System.out.println(firstIndexOf(a, 0, Comparator.naturalOrder()));
+            System.out.println(lastIndexOf(a, 0, Comparator.naturalOrder()));
+            System.out.println(firstIndexOf(b, -1, Comparator.naturalOrder()));
+            System.out.println(lastIndexOf(b, -1, Comparator.naturalOrder()));*/
 
-            System.out.println("First index is: " + firstIndexOf(dictionary,key,Term.byLexicographicOrder));
-            System.out.println("Last index is: " + lastIndexOf(dictionary,key,Term.byLexicographicOrder));
-            /*System.out.println("First index is: " + firstIndexOf(terms,key,Term.byLexicographicOrder));
-            System.out.println("First index is: " + firstIndexOf(terms2,key,Term.byLexicographicOrder));
+            /*System.out.println("First index is: " + firstIndexOf(dictionary,key,Term.byLexicographicOrder));
+            System.out.println("Last index is: " + lastIndexOf(dictionary,key,Term.byLexicographicOrder));*/
+            System.out.println("First index is: " + firstIndexOf(terms,key,Term.byLexicographicOrder));
+            /*System.out.println("First index is: " + firstIndexOf(terms2,key,Term.byLexicographicOrder));*/
             System.out.println("Last index is: " + lastIndexOf(terms,key,Term.byLexicographicOrder));
-            System.out.println("Last index is: " + lastIndexOf(terms2,key,Term.byLexicographicOrder));*/
+           /* System.out.println("Last index is: " + lastIndexOf(terms2,key,Term.byLexicographicOrder));*/
     }
 }
