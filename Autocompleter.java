@@ -23,7 +23,7 @@ public class Autocompleter {
     public int numberOfMatches(String prefix) {
         // TODO
         int[] startAndEndIndices = findPrefix(prefix);
-        return (startAndEndIndices[1]-startAndEndIndices[0]);
+        return (startAndEndIndices[1]-startAndEndIndices[0] + 1);
     }
 
     private int[] findPrefix(String prefix){
@@ -39,7 +39,7 @@ public class Autocompleter {
     public Term[] allMatches(String prefix) {
         // TODO
         int[] startAndEndIndices = findPrefix(prefix);
-        Term[] prefixTerms = Arrays.copyOfRange(dictionary, startAndEndIndices[0], startAndEndIndices[1]);
+        Term[] prefixTerms = Arrays.copyOfRange(dictionary, startAndEndIndices[0], startAndEndIndices[1] + 1);
         Arrays.sort(prefixTerms,Term.byReverseWeightOrder);
         return prefixTerms;
     }
