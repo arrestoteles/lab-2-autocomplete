@@ -3,16 +3,22 @@
 ******************************************************************************/
 
 Group members:
-- [...]
-- [...]
-- [...]
+- Armin Balesic
+- Shariq Shahbaz
+- Victor Campanello
 
 /******************************************************************************
 ** 1. Describe how your firstIndexOf() method in RangeBinarySearch.java
 **    finds the first index of a key that equals the search key.
 ******************************************************************************/
 
-[...]
+Because we're comparing Strings we need to implement the Comparator Interface so that we can use the compare() method
+and compare the Strings depending on the implemented Comparator logic and the tests in Term.java. We compare either by
+lexicographic order or weight (both cases in the tests). Then we can use the BinarySearch algorithms as it is normally
+used, e.g. when the elements are integers in a sorted list. If our list contains only one element,
+we just return the single element with the word. Otherwise we continue to check whether the prefix is in
+the left or right part of the list. If we find a matching prefix, we continue to check if there's a matching prefix
+to the left. If yes, we iterate this step. If no, we return the firstIndexOf in the list.
 
 /******************************************************************************
 ** 2. State and justify the asymptotic complexity of the operations
@@ -23,17 +29,17 @@ Group members:
 **    You may take the number of comparisons as a proxy for the runtime.
 ******************************************************************************/
 
-sortDictionary: O(...)
+sortDictionary: O(N log N)
 
-[..short explanation..]
+[sortDictionary uses Arrays.sort to sort the array, which has the complexity of N log N]
 
-numberOfMatches: O(...)
+numberOfMatches: O(log N)
 
-[..short explanation..]
+[numberOfMatches uses binary search to find the number of matches, which has the complexity of log N]
 
 allMatches: O(...)
 
-[..short explanation..]
+[ allMatches uses Arrays.sort to sort the array, which has the complexity of N log N]
 
 /******************************************************************************
 ** Appendix: General information
@@ -41,15 +47,15 @@ allMatches: O(...)
 ** A. Approximately how many hours did you spend on the assignment?
 ******************************************************************************/
 
-[..group member..]:  [..hours..]
-[..group member..]:  [..hours..]
-[..group member..]:  [..hours..]
+- Armin Balesic
+- Shariq Shahbaz
+- Victor Campanello
 
 /******************************************************************************
 ** B. Are there any known bugs / limitations?
 ******************************************************************************/
 
-[...]
+No
 
 /******************************************************************************
 ** C. Did you collaborate with any other students on this lab?
@@ -58,13 +64,13 @@ allMatches: O(...)
 **    may have used in creating your design.
 ******************************************************************************/
 
-[...]
+No
 
 /******************************************************************************
 ** D. Describe any serious problems you encountered.                    
 ******************************************************************************/
 
-[...]
+N/A
 
 /******************************************************************************
 ** E. List any other comments here.
@@ -72,4 +78,4 @@ allMatches: O(...)
 **    from doing the assignment, and whether you enjoyed it.                                             
 ******************************************************************************/
 
-[...]
+N/A

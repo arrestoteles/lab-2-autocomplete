@@ -93,8 +93,10 @@ public class RangeBinarySearch {
             Arrays.sort(dictionary, Term.byLexicographicOrder);
             Term key = new Term("abd",0);
 
+
             Integer[] a = {0, 1};
             Integer[] b = {0, 2};
+
             /*System.out.println(firstIndexOf(a, 0, Comparator.naturalOrder()));
             System.out.println(lastIndexOf(a, 0, Comparator.naturalOrder()));
             System.out.println(firstIndexOf(b, -1, Comparator.naturalOrder()));

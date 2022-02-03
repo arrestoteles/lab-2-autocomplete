@@ -1,3 +1,6 @@
+import org.w3c.dom.ranges.Range;
+
+import java.util.Arrays;
 
 public class Autocompleter {
     private final Term[] dictionary;
@@ -10,9 +13,8 @@ public class Autocompleter {
 
     // Sorts the dictionary in *case-insensitive* lexicographic order.
     // Complexity: O(N log N) where N is the number of dictionary terms
-    private void sortDictionary() {
-        // TODO
-        throw new UnsupportedOperationException();
+    private void sortDictionary(){
+        Arrays.sort(dictionary, Term.byLexicographicOrder);
     }
 
     // Returns the number of terms that start with the given prefix.
@@ -20,7 +22,15 @@ public class Autocompleter {
     // Complexity: O(log N) where N is the number of dictionary terms
     public int numberOfMatches(String prefix) {
         // TODO
-        throw new UnsupportedOperationException();
+        int[] startAndEndIndices = findPrefix(prefix);
+        return (startAndEndIndices[1]-startAndEndIndices[0]);
+    }
+
+    private int[] findPrefix(String prefix){
+        Term prefixTerm = new Term(prefix, 0);
+        int startIndex = RangeBinarySearch.firstIndexOf(dictionary, prefixTerm, Term.byPrefixOrder(prefix.length()));
+        int endIndex = RangeBinarySearch.lastIndexOf(dictionary, prefixTerm, Term.byPrefixOrder(prefix.length()));
+        return new int[]{startIndex, endIndex};
     }
 
     // Returns all terms that start with the given prefix, in descending order of weight.
@@ -28,6 +38,9 @@ public class Autocompleter {
     // Complexity: O(log N + M log M) where M is the number of matching terms
     public Term[] allMatches(String prefix) {
         // TODO
-        throw new UnsupportedOperationException();
+        int[] startAndEndIndices = findPrefix(prefix);
+        Term[] prefixTerms = Arrays.copyOfRange(dictionary, startAndEndIndices[0], startAndEndIndices[1]);
+        Arrays.sort(prefixTerms,Term.byReverseWeightOrder);
+        return prefixTerms;
     }
 }
