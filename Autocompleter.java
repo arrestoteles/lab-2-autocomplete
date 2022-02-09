@@ -31,10 +31,10 @@ public class Autocompleter {
 
     // Helper method added to avoid repeated code
     private int[] findPrefix(String prefix){
-        Term prefixTerm = new Term(prefix, 0);
+        Term prefixTerm = new Term(prefix, 0); // searches for the first and last instance of the prefix in the dictionary
         int startIndex = RangeBinarySearch.firstIndexOf(dictionary, prefixTerm, Term.byPrefixOrder(prefix.length()));
         int endIndex = RangeBinarySearch.lastIndexOf(dictionary, prefixTerm, Term.byPrefixOrder(prefix.length()));
-        return new int[]{startIndex, endIndex};
+        return new int[]{startIndex, endIndex}; // returns the range in the dictionary in which the prefix matches with the words
     }
 
     // Returns all terms that start with the given prefix, in descending order of weight.
@@ -43,9 +43,9 @@ public class Autocompleter {
     public Term[] allMatches(String prefix) {
         // TODO
         if(numberOfMatches(prefix) > 0){
-            int[] startAndEndIndices = findPrefix(prefix); // O(log(n))
-            Term[] prefixTerms = Arrays.copyOfRange(dictionary, startAndEndIndices[0], startAndEndIndices[1] + 1); // O(m)
-            Arrays.sort(prefixTerms,Term.byReverseWeightOrder); // O(M*log(M))
+            int[] startAndEndIndices = findPrefix(prefix); // O(log(n)), returns the range in the dictionary in which the prefix matches with the words
+            Term[] prefixTerms = Arrays.copyOfRange(dictionary, startAndEndIndices[0], startAndEndIndices[1] + 1); // O(m), gets the words that the findprefix found
+            Arrays.sort(prefixTerms,Term.byReverseWeightOrder); // O(M*log(M)) sorts the prefix terms by Reverse Weight Order
             return prefixTerms;
         }
         return new Term[]{};
