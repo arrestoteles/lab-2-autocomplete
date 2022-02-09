@@ -16,7 +16,7 @@ Because we're comparing Strings we need to implement the Comparator Interface so
 and compare the Strings depending on the implemented Comparator logic and the tests in Term.java. We compare either by
 lexicographic order or weight (both cases in the tests). Then we can use the BinarySearch algorithms as it is normally
 used, e.g. when the elements are integers in a sorted list. If our list contains only one element,
-we just return the single element with the word. Otherwise we continue to check whether the prefix is in
+we just return the single element with the word. Otherwise, we continue to check whether the prefix is in
 the left or right part of the list. If we find a matching prefix, we continue to check if there's a matching prefix
 to the left. If yes, we iterate this step. If no, we return the firstIndexOf in the list.
 

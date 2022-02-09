@@ -45,7 +45,7 @@ public class Term {
     public static final Comparator<Term> byReverseWeightOrder = new Comparator<Term>() {
         @Override
         public int compare(Term t1, Term t2) {
-            return 0-Long.compare(t1.getWeight(), t2.getWeight());
+            return Long.compare(t2.getWeight(), t1.getWeight());
         }
     };
 
