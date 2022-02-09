@@ -14,6 +14,7 @@ public class Autocompleter {
     // Sorts the dictionary in *case-insensitive* lexicographic order.
     // Complexity: O(N log N) where N is the number of dictionary terms
     private void sortDictionary(){
+        // TODO
         Arrays.sort(dictionary, Term.byLexicographicOrder);
     }
 
