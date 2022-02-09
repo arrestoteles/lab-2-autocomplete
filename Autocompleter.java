@@ -29,6 +29,7 @@ public class Autocompleter {
         return (start != -1 && end != -1) ? end - start + 1 : 0;
     }
 
+    // Helper method added to avoid repeated code
     private int[] findPrefix(String prefix){
         Term prefixTerm = new Term(prefix, 0);
         int startIndex = RangeBinarySearch.firstIndexOf(dictionary, prefixTerm, Term.byPrefixOrder(prefix.length()));
