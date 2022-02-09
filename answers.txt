@@ -12,13 +12,18 @@ Group members:
 **    finds the first index of a key that equals the search key.
 ******************************************************************************/
 
-Because we're comparing Strings we need to implement the Comparator Interface so that we can use the compare() method
-and compare the Strings depending on the implemented Comparator logic and the tests in Term.java. We compare either by
-lexicographic order or weight (both cases in the tests). Then we can use the BinarySearch algorithms as it is normally
-used, e.g. when the elements are integers in a sorted list. If our list contains only one element,
-we just return the single element with the word. Otherwise, we continue to check whether the prefix is in
-the left or right part of the list. If we find a matching prefix, we continue to check if there's a matching prefix
-to the left. If yes, we iterate this step. If no, we return the firstIndexOf in the list.
+We initialize three variables, high which stores the highest index of the array, low which stores the lowest index and
+currentMatch which is intialized with -1. Then we initiate a while loop to run while the low index is less than or
+equal to the high index. We calculate the middle of the array based on the high and low values and store it in a
+variable. We then compare the value stored at the middle index with the key using the compare method of the comparator
+and store the result in a variable to avoid repeated method calls. If the key is equal to the value at mid, we store
+the value of mid in currentMatch equal to the value of mid and reset high to mid-1. This allows us to continue the loop
+so we can search leftwards for an earlier instance of key (and we don't just return the index of the first match like
+a normal binarysearch. If the value at mid is greater than the key, i.e key is to the  left of the mid,
+we reset high to mid-1 and continue the loop. If the key is greater than the value at mid, i.e key is to the right of
+mid, we reset low to mid+1 and continue the loop. When the while loop condiditon is no longer true, i.e when we have an
+array of size one we break out of the loop. Then we return currentMatch which either stores the first index of key or
+-1 if the key was not found in the array.
 
 /******************************************************************************
 ** 2. State and justify the asymptotic complexity of the operations
@@ -29,17 +34,20 @@ to the left. If yes, we iterate this step. If no, we return the firstIndexOf in 
 **    You may take the number of comparisons as a proxy for the runtime.
 ******************************************************************************/
 
-sortDictionary: O(N log N)
+sortDictionary: O(N log N), where N is the size of the dictionary array
 
-[sortDictionary uses Arrays.sort to sort the array, which has the complexity of N log N]
+sortDictionary uses Arrays.sort to sort the array, which has the complexity of N log N
 
-numberOfMatches: O(log N)
+numberOfMatches: O(log N), where N is the size of the dictionary array
 
-[numberOfMatches uses binary search to find the number of matches, which has the complexity of log N]
+numberOfMatches uses our modified binary search twice to find the number of matches, which has the asymptotic
+complexity of log N (doing the binary search twice does not influence the asymptotic complexity of the method).
 
-allMatches: O(...)
+allMatches: O(log N M log M), where N is the size of the array and M is the number of matches
 
-[ allMatches uses Arrays.sort to sort the array, which has the complexity of N log N]
+allMatches uses binary search twice to find the number of matches, which has the complexity of log N. Then it uses
+Arrays.sort to sort the array of matches, which has the complexity of M log M. (Other operations such as
+Arrays.copyRangeOf() can be ignored as they do not influence the asymptotic complexity of the method).
 
 /******************************************************************************
 ** Appendix: General information
@@ -48,8 +56,8 @@ allMatches: O(...)
 ******************************************************************************/
 
 - Armin Balesic
-- Shariq Shahbaz
-- Victor Campanello
+- Shariq Shahbaz +0.5
+- Victor Campanello +0.5
 
 /******************************************************************************
 ** B. Are there any known bugs / limitations?
