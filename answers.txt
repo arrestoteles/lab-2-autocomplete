@@ -55,9 +55,9 @@ Arrays.copyRangeOf() can be ignored as they do not influence the asymptotic comp
 ** A. Approximately how many hours did you spend on the assignment?
 ******************************************************************************/
 
-- Armin Balesic
-- Shariq Shahbaz +0.5
-- Victor Campanello +0.5
+- Armin Balesic: 8 hours
+- Shariq Shahbaz 8.5 hours
+- Victor Campanello 8.5 hours
 
 /******************************************************************************
 ** B. Are there any known bugs / limitations?
