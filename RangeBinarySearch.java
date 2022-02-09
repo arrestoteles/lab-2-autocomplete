@@ -19,13 +19,13 @@ public class RangeBinarySearch {
        while (low <= high) {
            int mid = (low + high) / 2;
            int comparison = comparator.compare(a[mid], key);
-           if (comparison == 0) {
+           if (comparison == 0) {           // a[mid] and key are the same
                currentMatch = mid;
-               high = mid - 1;              // In right half
-           } else if (comparison < 0) {
+               high = mid - 1;
+           } else if (comparison < 0) {     // a[mid] is LEFT of key
                low = mid+1;
-           } else {
-               high = mid-1;             // In left half or the same
+           } else {                         // a[mid] is RIGHT of key
+               high = mid-1;
            }
        }
        return currentMatch; // Search value not in array
@@ -43,13 +43,13 @@ public class RangeBinarySearch {
        while (low <= high) {
            int mid = (low + high) / 2;
            int comparison = comparator.compare(a[mid], key);
-           if (comparison == 0) {
+           if (comparison == 0) {           // a[mid] and key are the same
                currentMatch = mid;
-               low = mid+1;              // In right half
-           } else if (comparison < 0) {
                low = mid+1;
-           } else {
-               high = mid-1;             // In left half or the same
+           } else if (comparison < 0) {     // a[mid] is LEFT of key
+               low = mid+1;
+           } else {                         // a[mid] is RIGHT of key
+               high = mid-1;
            }
        }
        return currentMatch; // Search value not in array
